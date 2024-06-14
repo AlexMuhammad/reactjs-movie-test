@@ -42,10 +42,10 @@ export const Typography: TypographyComponent = React.forwardRef(
             variant === "h5" && [
               "font-bnv-regular text-base font-semibold",
             ],
-            variant === "h6" && ["font-orderfaz-regular text-sm font-semibold"],
+            variant === "h6" && ["font-bnv-regular text-sm"],
           ],
           [
-            color === "primary" && ["text-[#8362F2]"],
+            color === "primary" && ["text-black"],
             color === "dark" && ["text-black"],
             color === "white" && ["text-white"],
             color === "danger" && ["text-red-700"],

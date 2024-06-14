@@ -1,12 +1,12 @@
-import { useState } from 'react'
+import { useState } from "react";
+import Home from "./pages/home";
 
 function App() {
-
   return (
     <>
-    <h1 className='bg-red-400'>tes</h1>
+      <Home />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
