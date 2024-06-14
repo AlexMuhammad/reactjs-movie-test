@@ -15,7 +15,3 @@ export const Container: React.FC<ContainerProps> = ({ children }) => {
     </main>
   );
 };
-
-// export const ContainerDetail: React.FC<ContainerProps> = ({ children }) => {
-//   return <main className="p-5 md:p-[90px]">{children}</main>;
-// };
