@@ -10,6 +10,7 @@ interface MovieItemProps {
   poster: string;
   date: string;
   movie_id: number;
+  onAddToWatched?: () => void;
 }
 
 type CardProps = {
@@ -22,6 +23,7 @@ export const Card = ({
   movie_id,
   poster,
   title,
+  onAddToWatched,
   ...rest
 }: CardProps & MovieItemProps) => {
   return (
@@ -58,6 +60,7 @@ export const Card = ({
             color="white"
             strokeWidth={1}
             className="hover:cursor-pointer"
+            onClick={onAddToWatched}
           />
         </div>
       </div>
