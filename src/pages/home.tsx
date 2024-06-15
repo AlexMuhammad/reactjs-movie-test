@@ -43,7 +43,7 @@ const Home = () => {
             date={item.release_date}
             movie_id={item.id}
             watched={watchedMovies.includes(item.id)}
-            onAddToWatched={() => onAddToWatched(item)}
+            handleBookmark={() => onAddToWatched(item)}
           />
         ))}
       </section>

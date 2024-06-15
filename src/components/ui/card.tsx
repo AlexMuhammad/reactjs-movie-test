@@ -11,7 +11,7 @@ interface MovieItemProps {
   date: string;
   movie_id: number;
   watched: boolean;
-  onAddToWatched?: () => void;
+  handleBookmark?: () => void;
 }
 
 type CardProps = {
@@ -25,7 +25,7 @@ export const Card = ({
   poster,
   title,
   watched,
-  onAddToWatched,
+  handleBookmark,
   ...rest
 }: CardProps & MovieItemProps) => {
   return (
@@ -63,7 +63,7 @@ export const Card = ({
             color="white"
             strokeWidth={1}
             className="hover:cursor-pointer"
-            onClick={onAddToWatched}
+            onClick={handleBookmark}
           />
         </div>
       </div>

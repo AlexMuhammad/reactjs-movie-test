@@ -16,10 +16,9 @@ function App() {
         console.error("Error syncing offline changes:", error)
       );
     }
-  }, [isOnline])
+  }, [isOnline]);
   return (
     <>
-      <h3>Network Status: {isOnline ? "Online" : "Offline"}</h3>
       <Routes>
         <Route>
           <Route
