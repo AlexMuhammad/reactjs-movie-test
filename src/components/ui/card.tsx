@@ -10,6 +10,7 @@ interface MovieItemProps {
   poster: string;
   date: string;
   movie_id: number;
+  watched: boolean;
   onAddToWatched?: () => void;
 }
 
@@ -23,6 +24,7 @@ export const Card = ({
   movie_id,
   poster,
   title,
+  watched,
   onAddToWatched,
   ...rest
 }: CardProps & MovieItemProps) => {
@@ -44,7 +46,7 @@ export const Card = ({
         </DetailModal>
       </div>
       <div className="flex items-center absolute bg-white bg-opacity-80 top-3 right-3 rounded-md p-1 gap-1">
-        <Calendar width={18} height={18} color="#FF8C00"/>
+        <Calendar width={18} height={18} color="#FF8C00" />
         <Typography variant="h6" className="text-[#FF8C00] text-xs">
           {getYearFromDate(date)}
         </Typography>
@@ -55,6 +57,7 @@ export const Card = ({
         </Typography>
         <div className="flex items-center">
           <Bookmark
+            fill={watched ? "red" : "transparent"}
             width={20}
             height={20}
             color="white"

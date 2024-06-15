@@ -1,6 +1,8 @@
+const CACHE_NAME = "my-movie-cache";
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open("my-movie-cache").then((cache) => {
+    caches.open(CACHE_NAME).then((cache) => {
       return cache.addAll([
         "/",
         "/index.html",
@@ -9,16 +11,39 @@ self.addEventListener("install", (event) => {
         "/src/pages/watched.tsx",
         "/src/index.css",
         "/vite.svg",
+        "/src/components",
       ]);
+    })
+  );
+});
+
+self.addEventListener("activate", (event) => {
+  console.log("Service Worker activating.");
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames
+          .filter((cacheName) => {
+            return cacheName !== CACHE_NAME;
+          })
+          .map((cacheName) => {
+            return caches.delete(cacheName);
+          })
+      );
     })
   );
 });
 
 self.addEventListener("fetch", (event) => {
   const requestUrl = new URL(event.request.url);
-  if (requestUrl.protocol !== "chrome-extension:") {
-    event.respondWith(
-      caches.match(event.request).then((response) => {
+
+  if (requestUrl.protocol.startsWith("chrome-extension:")) {
+    return;
+  }
+  event.respondWith(
+    caches
+      .match(event.request)
+      .then((response) => {
         if (response) {
           return response;
         }
@@ -33,8 +58,8 @@ self.addEventListener("fetch", (event) => {
               return fetchResponse;
             }
             const responseToCache = fetchResponse.clone();
-            caches.open("my-movie-cache").then((cache) => {
-              cache.put(event.request, responseToCache); 
+            caches.open(CACHE_NAME).then((cache) => {
+              cache.put(event.request, responseToCache);
             });
             return fetchResponse;
           })
@@ -43,6 +68,36 @@ self.addEventListener("fetch", (event) => {
             throw error;
           });
       })
-    );
-  }
+      .catch((error) => {
+        console.error("Error in fetch handler:", error);
+        return new Response("Offline Page Placeholder");
+      })
+  );
 });
+
+self.addEventListener('sync', (event) => {
+    if (event.tag === 'sync-watched-movies') {
+      event.waitUntil(syncWatchedMovies());
+    }
+  });
+  
+  const syncWatchedMovies = async () => {
+    const db = await openDB('movies-db', 1);
+    const operations = await db.getAll('pending-watched-movies');
+  
+    for (const operation of operations) {
+      try {
+        await fetch('/api/watched-movies', {
+          method: operation.method,
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(operation.data),
+        });
+        // Remove the pending operation after successful sync
+        await db.delete('pending-watched-movies', operation.id);
+      } catch (error) {
+        console.error('Sync failed for operation', operation, error);
+      }
+    }
+  };

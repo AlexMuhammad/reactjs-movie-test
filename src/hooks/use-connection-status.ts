@@ -1,10 +1,14 @@
 import { useState, useEffect } from "react";
+import { syncOfflineChanges } from "../services/sync";
 
 const useConnectionStatus = (): boolean => {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   useEffect(() => {
-    const handleOnline = () => setIsOnline(true);
+    const handleOnline = () => {
+      setIsOnline(true)
+      syncOfflineChanges()
+    };
     const handleOffline = () => setIsOnline(false);
 
     window.addEventListener("online", handleOnline);
