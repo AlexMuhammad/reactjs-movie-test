@@ -4,14 +4,13 @@ import { Container } from "../components/layouts/container";
 import Card from "../components/ui/card";
 import { Typography } from "../components/ui/typography";
 import { MovieProps } from "../types";
-import {
-  deleteWatchedMovie,
-  getWatchedMovies,
-} from "../services/idb";
+import { deleteWatchedMovie, getWatchedMovies } from "../services/idb";
+import Toast from "../components/ui/toast";
 
 const Watched = () => {
   const [data, setData] = React.useState<MovieProps[]>([]);
   const [watchedMovies, setWatchedMovies] = React.useState<number[]>([]);
+  const [toastMessage, setToastMessage] = React.useState<string | null>(null);
 
   React.useEffect(() => {
     const fetchWatchedMovies = async () => {
@@ -30,6 +29,7 @@ const Watched = () => {
       setWatchedMovies((prevWatchedMovies) =>
         prevWatchedMovies.filter((id) => id !== movie.id)
       );
+      setToastMessage(`${movie.title} removed from watched list`);
     }
   };
 
@@ -55,6 +55,13 @@ const Watched = () => {
           />
         ))}
       </section>
+      {toastMessage && (
+        <Toast
+          message={toastMessage}
+          type="success"
+          onClose={() => setToastMessage(null)}
+        />
+      )}
     </Container>
   );
 };
