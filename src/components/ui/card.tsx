@@ -11,6 +11,9 @@ interface MovieItemProps {
   date: string;
   movie_id: number;
   watched: boolean;
+  vote: number,
+  popularity: number,
+  description: string;
   handleBookmark?: () => void;
 }
 
@@ -25,6 +28,9 @@ export const Card = ({
   poster,
   title,
   watched,
+  vote,
+  popularity,
+  description,
   handleBookmark,
   ...rest
 }: CardProps & MovieItemProps) => {
@@ -34,7 +40,7 @@ export const Card = ({
       {...rest}
     >
       <div className="h-full">
-        <DetailModal>
+        <DetailModal title={title} description={description} image={poster} vote={vote} popularity={popularity} date={date} handleBookmark={handleBookmark} watched={watched}>
           {({ openModal }) => (
             <img
               onClick={openModal}

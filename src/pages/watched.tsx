@@ -47,6 +47,9 @@ const Watched = () => {
             poster={item.poster_path}
             date={item.release_date}
             movie_id={item.id}
+            description={item.overview}
+            popularity={item.popularity}
+            vote={item.vote_count}
             watched={watchedMovies.includes(item.id)}
             handleBookmark={() => onToggleWatched(item)}
           />

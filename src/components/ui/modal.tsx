@@ -1,5 +1,5 @@
 import { Dialog, Transition } from "@headlessui/react";
-import { X } from "lucide-react";
+import { XIcon } from "lucide-react";
 import * as React from "react";
 import mergeClx from "../../libs/merge-clx";
 import { Typography } from "./typography";
@@ -72,7 +72,7 @@ export function ModalRoot({
             <div
               className={mergeClx(
                 "align inline-block transform rounded-2xl bg-white text-left shadow-xl transition-all sm:align-middle",
-                "sm:w-11/12 sm:max-w-xl",
+                "w-full sm:w-1/2 max-w-full",
                 modalContainerClassName
               )}
             >
@@ -88,10 +88,9 @@ export function ModalRoot({
                     onClick={() => setOpen(false)}
                     variant="ghost"
                     size="sm"
-                    icon={X}
                     iconClassName="text-2xl text-typo-icons"
                   >
-                    tes
+                    <XIcon />
                   </Button>
                 </header>
                 {children}
@@ -109,7 +108,7 @@ function Section({
   children,
 }: React.ComponentPropsWithoutRef<"div">) {
   return (
-    <div className={mergeClx("flex w-full flex-col", "p-4 sm:p-6", className)}>
+    <div className={mergeClx("flex w-full", "p-4 sm:p-6", className)}>
       {children}
     </div>
   );

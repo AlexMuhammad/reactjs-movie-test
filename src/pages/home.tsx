@@ -34,15 +34,18 @@ const Home = () => {
   return (
     <Container>
       <Navbar />
-      <section className="grid-cols-1 px-3 grid gap-5 md:grid-cols-4 sm:grid-cols-2 md:px-0">
+      <section className="grid-cols-1 px-3 grid gap-5 md:grid-cols-4 sm:grid-cols-2 md:px-0 pb-5">
         {data.map((item: MovieProps, index: any) => (
           <Card
             key={index}
             title={item.title}
             poster={item.poster_path}
             date={item.release_date}
+            description={item.overview}
             movie_id={item.id}
             watched={watchedMovies.includes(item.id)}
+            popularity={item.popularity}
+            vote={item.vote_count}
             handleBookmark={() => onAddToWatched(item)}
           />
         ))}

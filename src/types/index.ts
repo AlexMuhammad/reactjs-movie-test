@@ -3,4 +3,7 @@ export interface MovieProps {
     title: string,
     release_date: string,
     poster_path: string,
+    overview: string,
+    popularity: number,
+    vote_count: number
 }

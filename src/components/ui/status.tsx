@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Transition } from "@headlessui/react";
 import { GlobeIcon, XIcon } from "lucide-react";
+import { Typography } from "./typography";
 
 const Status = ({ isOnline }: { isOnline: boolean }) => {
   return (
@@ -13,17 +14,21 @@ const Status = ({ isOnline }: { isOnline: boolean }) => {
       leaveFrom="opacity-100"
       leaveTo="opacity-0"
     >
-      <div className="flex items-center p-2 rounded-lg bg-gray-800 text-white shadow-lg">
+      <div>
         {isOnline ? (
-          <>
+          <div className="bg-green-700 flex items-center p-2 rounded-lg text-white shadow-lg">
             <GlobeIcon className="h-5 w-5 mr-2" />
-            <span>Online</span>
-          </>
+            <Typography variant="h6" className="text-white">
+              Online
+            </Typography>
+          </div>
         ) : (
-          <>
+          <div className="bg-red-700 flex items-center p-2 rounded-lg text-white shadow-lg">
             <XIcon className="h-5 w-5 mr-2" />
-            <span>Offline</span>
-          </>
+            <Typography variant="h6" className="text-white">
+              Offline
+            </Typography>
+          </div>
         )}
       </div>
     </Transition>
