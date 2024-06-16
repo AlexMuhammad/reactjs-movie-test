@@ -9,6 +9,7 @@ self.addEventListener("install", (event) => {
         "/src/main.tsx",
         "/src/pages/home.tsx",
         "/src/pages/watched.tsx",
+        "/src/pages/detail.tsx",
         "/src/index.css",
         "/vite.svg",
         "/src/components",

@@ -5,5 +5,6 @@ export interface MovieProps {
     poster_path: string,
     overview: string,
     popularity: number,
-    vote_count: number
+    vote_count: number,
+    backdrop_path: string
 }

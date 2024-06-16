@@ -1,19 +1,20 @@
 import * as React from "react";
 import { Typography } from "./typography";
 import { Bookmark, Calendar } from "lucide-react";
-import DetailModal from "../modals/detail-modal";
 import { getYearFromDate } from "../../utils";
+import { Link } from "react-router-dom";
+import { baseImgUrl } from "../../constants";
 
-const baseImgUrl = import.meta.env.VITE_IMAGEURL;
 interface MovieItemProps {
   title: string;
   poster: string;
   date: string;
   movie_id: number;
   watched: boolean;
-  vote: number,
-  popularity: number,
+  vote: number;
+  popularity: number;
   description: string;
+  backdrop: string;
   handleBookmark?: () => void;
 }
 
@@ -31,6 +32,7 @@ export const Card = ({
   vote,
   popularity,
   description,
+  backdrop,
   handleBookmark,
   ...rest
 }: CardProps & MovieItemProps) => {
@@ -40,16 +42,28 @@ export const Card = ({
       {...rest}
     >
       <div className="h-full">
-        <DetailModal title={title} description={description} image={poster} vote={vote} popularity={popularity} date={date} handleBookmark={handleBookmark} watched={watched}>
-          {({ openModal }) => (
-            <img
-              onClick={openModal}
-              src={`${baseImgUrl}/${poster}`}
-              alt="movie"
-              className="object-center transition-all duration-300 hover:scale-110 hover:cursor-pointer"
-            />
-          )}
-        </DetailModal>
+        <Link
+          to="/detail"
+          state={{
+            data: {
+              date,
+              movie_id,
+              poster,
+              title,
+              watched,
+              vote,
+              popularity,
+              description,
+              backdrop
+            },
+          }}
+        >
+          <img
+            src={`${baseImgUrl}/${poster}`}
+            alt="movie"
+            className="object-center transition-all duration-300 hover:scale-110 hover:cursor-pointer"
+          />
+        </Link>
       </div>
       <div className="flex items-center absolute bg-white bg-opacity-80 top-3 right-3 rounded-md p-1 gap-1">
         <Calendar width={18} height={18} color="#FF8C00" />

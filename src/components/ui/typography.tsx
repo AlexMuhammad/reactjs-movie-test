@@ -35,12 +35,12 @@ export const Typography: TypographyComponent = React.forwardRef(
         ref={ref}
         className={mergeClx(
           [
-            variant === "h1" && ["font-bnv-bold text-7xl"],
+            variant === "h1" && ["font-bnv-bold text-4xl md:text-7xl"],
             variant === "h2" && ["font-bnv-medium md:text-3xl"],
             variant === "h3" && ["font-bnv-medium text-lg"],
             variant === "h4" && ["font-bnv-regular text-lg"],
             variant === "h5" && [
-              "font-bnv-regular text-base font-semibold",
+              "font-bnv-regular text-base",
             ],
             variant === "h6" && ["font-bnv-regular text-sm"],
           ],

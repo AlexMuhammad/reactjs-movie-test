@@ -40,8 +40,7 @@ const Home = () => {
   };
 
   return (
-    <Container>
-      <Navbar />
+    <>
       <section className="grid-cols-1 px-3 grid gap-5 md:grid-cols-4 sm:grid-cols-2 md:px-0 pb-5">
         {data.map((item: MovieProps, index: any) => (
           <Card
@@ -54,6 +53,7 @@ const Home = () => {
             watched={watchedMovies.includes(item.id)}
             popularity={item.popularity}
             vote={item.vote_count}
+            backdrop={item.backdrop_path}
             handleBookmark={() => onAddToWatched(item)}
           />
         ))}
@@ -65,7 +65,7 @@ const Home = () => {
           onClose={() => setToastMessage(null)}
         />
       )}
-    </Container>
+    </>
   );
 };
 

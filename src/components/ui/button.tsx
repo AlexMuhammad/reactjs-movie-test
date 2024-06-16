@@ -55,9 +55,9 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
           ],
           [
             variant === "primary" && [
-              "bg-[#8362F2] text-white",
+              "bg-white text-black",
               "border border-primary-600",
-              "hover:bg-primary-600 hover:text-white",
+              "hover:bg-opacity-90 hover:text-opacity-90",
               "active:bg-primary-700",
               "disabled:bg-primary-700",
               "focus-visible:ring-primary-400",
@@ -86,6 +86,7 @@ const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         )}
       >
         {Icon && <Icon size="1em" className={mergeClx(iconClassName)} />}
+
         {children}
       </button>
     );

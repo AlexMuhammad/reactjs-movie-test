@@ -34,8 +34,7 @@ const Watched = () => {
   };
 
   return (
-    <Container>
-      <Navbar />
+    <>
       <Typography variant="h2" className="text-white">
         Watched List
       </Typography>
@@ -50,6 +49,7 @@ const Watched = () => {
             description={item.overview}
             popularity={item.popularity}
             vote={item.vote_count}
+            backdrop={item.backdrop_path}
             watched={watchedMovies.includes(item.id)}
             handleBookmark={() => onToggleWatched(item)}
           />
@@ -62,7 +62,7 @@ const Watched = () => {
           onClose={() => setToastMessage(null)}
         />
       )}
-    </Container>
+    </>
   );
 };
 
